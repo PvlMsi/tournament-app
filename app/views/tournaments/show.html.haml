@@ -1,0 +1,41 @@
+%h1.mt-2.text-center= @tournament.name
+.row.m-4
+  = link_to 'Add team', new_tournament_team_path(@tournament), class: 'btn btn-primary btn-block m-3' unless @tournament.full?
+  - @tournament.divisions.each do |division|
+    .col
+      .card
+        .card-header.text-center
+          %p= division.name
+        %ul.list-group.list-group-flush
+          - division.teams.order_by_wins.each do |team|
+            %li.list-group-item
+              = team.name
+              = "#{team.division_matches_won} - #{team.division_matches_lost}"
+      - if division.full? && division.matches.finished.empty?
+        = link_to 'Generate results', generate_division_results_path(division), method: :post, class: 'btn btn-primary btn-block'
+
+- if @tournament.playoff&.matches&.any?
+  .row
+    .col
+    .col
+      .card.m-4
+        .card-header.text-center
+          Play-off
+        .bracket.p-3
+          - @tournament.playoff.matches.order(:round).group_by(&:round).each do |round, matches|
+            %ul.round
+              - matches.sort.each do |match|
+                %li.spacer
+                %li.match.match-upper{ class: "#{'winner' if match.first_team == match.winner}" }= match.first_team&.name
+                %li.match.match-spacer
+                %li.match.match-lower{ class: "#{'winner' if match.second_team == match.winner}" }= match.second_team&.name
+                - if matches.sort.last == match
+                  %li.spacer
+          %ul.round
+            %li.spacer
+            %li.match.match-upper.winner= @tournament.winner&.name
+            %li.spacer
+        - if @tournament.playoff.matches.finished.empty?
+          .text-center.mb-2
+            = link_to 'Generate results', generate_playoff_results_path(@tournament.playoff), method: :post, class: 'btn btn-primary'
+    .col

@@ -1,0 +1,21 @@
+AllCops:
+  TargetRubyVersion: 2.6.4
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'
+
+Metrics/LineLength:
+  Max: 125
+
+Metrics/BlockLength:
+  Exclude:
+    - "spec/**/*.rb"
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

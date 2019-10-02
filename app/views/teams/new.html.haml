@@ -1,0 +1,7 @@
+.card.m-4
+  .card-header.text-center New team
+  = form_for [@tournament, @team], html: { class: 'form-inline p-4' } do |f|
+    .form-group
+      = f.label :name
+      = f.text_field :name, class: 'form-control mx-sm-3'
+      = f.submit 'Add', class: 'btn btn-primary'

@@ -1,0 +1,43 @@
+.bracket {
+  display: flex;
+  flex-direction: row;
+  font-size: small;
+}
+
+.round{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 150px;
+  list-style: none;
+  padding: 0;
+}
+
+.round .match-spacer{
+  flex-grow: 1;
+}
+
+li.match{
+  padding-left: 20px;
+}
+
+li.match.winner{
+  font-weight: bold;
+}
+
+li.match-upper{
+  border-bottom: 1px solid black;
+}
+
+li.match-spacer{ 
+  border-right: 1px solid black;
+  min-height: 40px;
+}
+
+li.match-lower{ 
+  border-top: 1px solid black;
+}
+
+li.spacer{ flex-grow: 1; }
+li.spacer:first-child,
+li.spacer:last-child{ flex-grow: .5; }

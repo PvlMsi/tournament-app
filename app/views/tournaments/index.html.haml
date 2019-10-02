@@ -1,0 +1,4 @@
+%h3.text-center Tournaments
+- @tournaments.each do |tournament|
+  = link_to tournament.name, tournament_path(tournament), class: 'btn btn-outline-primary btn-block mb-2'
+= link_to 'New tournament', new_tournament_path, class: 'btn btn-primary btn-block mb-2'
